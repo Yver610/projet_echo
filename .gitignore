@@ -1,7 +1,21 @@
+# Fichiers et répertoires à ignorer par Git
+
+# Dépendances et environnements
 node_modules/
 venv/
+
+# Caches Python
 __pycache__/
-*.pycnode_modules/
-venv/
-_pycache_/
 *.pyc
+*.pyo
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers de base de données
+*.sqlite3
+
+# Configurations d'IDE
+.idea/
+.vscode/

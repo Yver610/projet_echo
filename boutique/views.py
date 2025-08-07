@@ -187,7 +187,9 @@ def ajouter_au_panier(request, produit_id):
             panier_session = request.session.get('panier', {})
             produit_id_str = str(produit_id)
 
-            print("📦 Ajout au panier session en cours...")  # <= AJOUTE CETTE LIGNE
+            # Ajout au panier en session pour un utilisateur anonyme
+            # Utiliser le logger plutôt qu'un print afin de ne pas polluer la sortie standard
+            logger.debug("Ajout au panier session en cours…")
 
             if produit_id_str in panier_session:
                 nouvelle_quantite = panier_session[produit_id_str]['quantite'] + quantite
@@ -266,16 +268,7 @@ def supprimer_du_panier_session(request):
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
-@login_required
-def panier_view(request):
-    panier = Panier.objects.filter(utilisateur=request.user).first()
-    produits = panier.produits.select_related('produit') if panier else []
-    total = sum(item.quantite * item.produit.prix for item in produits)
-
-    return render(request, 'boutique/panier.html', {
-        'produits': produits,
-        'total': total
-    })
+# La vue `panier_view` n'est plus utilisée.  Le panier est rendu via `panier_detail`.
 
 @login_required
 def commande_view(request):
