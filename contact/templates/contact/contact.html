@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact - Élevage Canin{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Contactez-nous</h2>
+
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="alert alert-{{ msg.tags }}">{{ msg }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nom" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="nom" name="nom" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Adresse email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+    </form>
+</div>
+{% endblock %}

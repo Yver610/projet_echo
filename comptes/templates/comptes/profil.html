@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Mon profil</h2>
+
+  <ul class="list-group">
+    <li class="list-group-item"><strong>Nom :</strong> {{ utilisateur.nom }}</li>
+    <li class="list-group-item"><strong>Prénom :</strong> {{ utilisateur.prenom }}</li>
+    <li class="list-group-item"><strong>Email :</strong> {{ utilisateur.email }}</li>
+    <li class="list-group-item"><strong>Téléphone :</strong> {{ utilisateur.telephone }}</li>
+    <li class="list-group-item"><strong>Adresse postale :</strong> {{ utilisateur.adresse_postale|linebreaksbr }}</li>
+    <li class="list-group-item"><strong>Adresse de facturation :</strong> {{ utilisateur.adresse_facturation|linebreaksbr }}</li>
+  </ul>
+
+  <a href="{% url 'profil_modifier' %}" class="btn btn-primary mt-3">Modifier mes informations</a>
+</div>
+{% endblock %}

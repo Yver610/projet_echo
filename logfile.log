@@ -1,0 +1,19 @@
+[2025-07-25 20:21:44,578] INFO boutique — [POST] Commande #10 validée — utilisateur=root — total=70.00
+[2025-07-25 20:35:30,568] INFO boutique — [POST] Commande #11 validée — utilisateur=root — total=45.00
+[2025-07-25 20:38:39,693] INFO boutique — [POST] Stock insuffisant — utilisateur=root — produit=Croquettes bio — demandé=999 — dispo=5
+[2025-07-25 21:02:38,051] WARNING boutique — [ACCESS] Tentative d'accès non autorisé — utilisateur=user2 — commande_id=1
+[2025-07-25 21:20:06,141] INFO boutique — [POST] Stock insuffisant — utilisateur=root — produit=Croquettes bio — demandé=10 — dispo=5
+[2025-07-27 12:38:37,331] INFO boutique — [POST] Commande #12 validée — utilisateur=root
+[2025-07-27 13:00:03,567] WARNING boutique — [STOCK] Stock faible — produit=Croquettes bio — stock=0
+[2025-07-27 13:00:03,611] INFO boutique — [POST] Commande #13 validée — utilisateur=root
+[2025-07-27 13:03:56,610] INFO boutique — [POST] Commande #14 validée — utilisateur=test
+[2025-08-06 11:11:08,265] INFO boutique — [POST] Commande #15 validée — utilisateur=root
+[2025-08-06 12:01:29,100] INFO boutique — [POST] Commande #16 validée — utilisateur=root
+[2025-08-06 12:23:50,682] INFO boutique — [POST] Commande #17 validée — utilisateur=root
+[2025-08-06 12:31:49,328] INFO boutique — [POST] Commande #18 validée — utilisateur=root
+[2025-08-06 12:35:25,714] INFO boutique — [POST] Commande #19 validée — utilisateur=root
+[2025-08-06 15:57:21,722] INFO boutique — [POST] Commande #20 validée — utilisateur=root
+[2025-08-06 17:34:33,865] INFO boutique — [POST] Commande #21 validée — utilisateur=root
+[2025-08-06 18:06:42,745] INFO boutique — [POST] Commande #22 validée — utilisateur=Krimo
+[2025-08-06 18:17:12,063] INFO boutique — [POST] Commande #23 validée — utilisateur=root
+[2025-08-06 18:21:02,607] INFO boutique — [POST] Commande #24 validée — utilisateur=root

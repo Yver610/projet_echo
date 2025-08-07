@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Accueil - Élevage Canin{% endblock %}
+
+{% block content %}
+<!-- SECTION TITRE -->
+<section class="hero-section full-width-section">
+    <div class="container-fluid p-0 text-center">
+        <img src="{% static 'img/mascotte.png' %}" class="mascotte mb-4" alt="Mascotte chiot">
+        <h1 class="display-4">L’ECHO DU BOSQUET</h1>
+        <hr class="divider my-3">
+        <h2 class="lead">Éducatrice canin</h2>
+    </div>
+</section>
+<!-- SECTION PRESENTATION  -->
+<section class="presentation-section full-width-section">
+    <div class="container-custom text-center">
+        <h2 class="mb-4">À propos de l’élevage</h2>
+        <p class="lead">Notre passion pour les chiens nous guide chaque jour pour offrir un cadre sain, affectueux et professionnel à chaque chiot.</p>
+        <p>Basé en pleine nature, notre élevage familial veille au bien-être, à l’éducation et à la socialisation dès les premières semaines.</p>
+
+        <a href="{% url 'a_propos' %}" class="btn btn-custom mt-4">En savoir plus</a>
+    </div>
+</section>
+<!-- SECTION ADOPTION -->
+<section class="adoption-section full-width-section">
+    <h2>Chiots à l’adoption</h2>
+    <div class="adoption-cta text-center mt-4">
+        <a href="{% url 'liste_portees' %}" class="btn btn-custom">Voir toutes les portées</a>
+    </div>
+    <div class="adoption-grid">
+        {% for chiot in chiots_mis_en_avant %}
+        <div class="adoption-card">
+            {% if chiot.photo %}
+                <img src="{{ chiot.photo.url }}" alt="{{ chiot.nom }}">
+            {% else %}
+                <img src="{% static 'img/placeholder_chiot.png' %}" alt="Chiot">
+            {% endif %}
+            <div class="card-body">
+                <h5>{{ chiot.nom }}</h5>
+                <p>{{ chiot.race }}</p>
+                <p>{{ chiot.prix }} €</p>
+                {% if chiot.disponible %}
+                    <span class="badge bg-success">Disponible</span>
+                {% else %}
+                    <span class="badge bg-secondary">Réservé</span>
+                {% endif %}
+                <a href="{% url 'reserver_chiot' chiot.id %}" class="btn mt-2">Je suis intéressé</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<!-- SECTION PRODUITS POPULAIRES -->
+<section class="produits-section full-width-section">
+    <h2>Produits populaires</h2>
+    <div class="produits-grid">
+        {% for produit in produits_populaires %}
+            <div class="produit-card">
+                {% if produit.image %}
+                    <img src="{{ produit.image.url }}" alt="{{ produit.nom }}">
+                {% else %}
+                    <img src="{% static 'img/placeholder_produit.png' %}" alt="Produit">
+                {% endif %}
+                <div class="card-body">
+                    <h5>{{ produit.nom }}</h5>
+                    <p>{{ produit.prix }} €</p>
+                    <a href="{% url 'boutique' %}" class="btn mt-2">Voir en boutique</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="produits-cta text-center mt-4">
+        <a href="{% url 'boutique' %}" class="btn btn-custom">Voir toute la boutique</a>
+    </div>
+</section>
+<section class="contact-section full-width-section">
+    <div class="container-custom text-center">
+        <h2>Nous rencontrer</h2>
+        <p class="lead">Une question ? Un projet d’adoption ? N’hésitez pas à nous contacter ou venir à notre rencontre pour en discuter !</p>
+        <a href="{% url 'contact' %}" class="btn btn-custom mt-3">Nous contacter</a>
+    </div>
+</section>
+{% endblock %}

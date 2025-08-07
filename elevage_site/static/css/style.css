@@ -1,0 +1,614 @@
+/* === Palette de base === */
+body {
+    background: linear-gradient(to bottom, #cfe7cf, #f0ebde);
+    font-family: 'Segoe UI', sans-serif;
+    color: #2b2b2b;
+    margin: 0;
+    padding: 0;
+}
+
+
+main {
+    flex: 1;
+    width: 100%;
+}
+
+/* === Titres === */
+h1, h2, h3 {
+    color: #3d533d;
+}
+
+/* === Sections === */
+section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+section::before {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 2px;
+    background-color: rgba(63, 81, 63, 0.3); /* vert léger */
+    margin: 0 auto 2rem;
+}
+
+
+/* === Boutons personnalisés === */
+.btn-custom {
+    background-color: #a6c8a1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+}
+
+.btn-custom:hover {
+    background-color: #8fb98a;
+}
+
+/* === Conteneur principal === */
+.container-custom {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 15px;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    object-fit: contain;
+    background-color: #fff; /* Pour éviter que le fond ne tranche */
+    padding: 10px; /* Optionnel pour bien encadrer le placeholder */
+}
+
+/* LARGEUR AUTO DES SECTIONS */
+.full-width-section {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+/* HOMPAGE --- TITRE */
+.hero-section {
+    background: transparent;
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+}
+
+.hero-section h1 {
+    margin-top: 0 !important;
+    margin-bottom: 1rem;
+    font-family: 'Georgia', serif;
+    color: #2f4f2f;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.hero-section .mascotte {
+    margin-top: 0 !important;
+    margin-bottom: 1rem;
+    max-width: 150px;
+}
+
+
+.hero-section .lead {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #3e593e;
+    font-size: 1.5rem;
+}
+
+.divider {
+    width: 100px;
+    height: 2px;
+    background-color: #3e593e;
+    margin: 0 auto;
+    border: none;
+}
+
+.hero-section img,
+.hero-section h1,
+.hero-section .divider,
+.hero-section .lead {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* HOMEPAGE --- 1ere section : Présentation */
+.presentation-section {
+    background-color: transparent;  /* ton clair naturel */
+    color: #2f4f2f;             /* vert foncé élégant */
+    font-family: 'Georgia', serif;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.presentation-section h2 {
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    color: #3e593e;
+}
+
+.presentation-section p {
+    max-width: 800px;
+    margin: 0 auto 1rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* HOMEPAGE --- Section Chiots à l'adoption */
+.adoption-section {
+    background-color: transparent;
+    padding: 3rem 1rem;
+    color: #2f4f2f;
+    font-family: 'Georgia', serif;
+}
+
+.adoption-section h2 {
+    text-align: center;
+    color: #3e593e;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+}
+
+/* Grille responsive */
+.adoption-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Carte chiot */
+.adoption-card {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.adoption-card:hover {
+    transform: translateY(-5px);
+}
+
+.adoption-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.adoption-card .card-body h5,
+.adoption-card .card-body p {
+    font-family: 'Georgia', serif;
+}
+
+.adoption-card .card-body {
+    padding: 1rem;
+    text-align: center;
+}
+
+.adoption-card .card-body h5 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #2f4f2f;
+}
+
+.adoption-card .card-body p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.adoption-card .btn {
+    background-color: #a6c8a1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.adoption-card .btn:hover {
+    background-color: #8fb98a;
+}
+
+.adoption-cta {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.btn-custom {
+    background-color: #a6c8a1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.btn-custom:hover {
+    background-color: #8fb98a;
+}
+
+/* HOMEPAGE --- Section Produits Populaires */
+.produits-section {
+    background-color: transparent;
+    padding: 3rem 1rem;
+    color: #2f4f2f;
+    font-family: 'Georgia', serif;
+}
+
+.produits-section h2 {
+    text-align: center;
+    color: #3e593e;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+}
+
+
+
+/* Grille responsive */
+.produits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Carte produit */
+.produit-card {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    text-align: center;
+}
+
+.produit-card:hover {
+    transform: translateY(-5px);
+}
+
+.produit-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.produit-card .card-body {
+    padding: 1rem;
+}
+
+.produit-card .card-body h5 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #2f4f2f;
+}
+
+.produit-card .card-body p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.produit-card .btn {
+    background-color: #a6c8a1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.produit-card .btn:hover {
+    background-color: #8fb98a;
+}
+
+.produits-cta {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* HOMEPAGE --- Section Contact */
+.contact-section {
+    background-color: transparent;
+    padding: 3rem 1rem;
+    color: #2f4f2f;
+    font-family: 'Georgia', serif;
+}
+
+.contact-section h2 {
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    color: #3e593e;
+}
+
+.contact-section .lead {
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+
+
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.page-wrapper main {
+    flex: 1;
+}
+
+.portee-wrapper .card-body h5,
+.portee-wrapper .card-body p,
+.portee-wrapper .card-body .btn,
+.portee-wrapper .card-body .badge {
+    text-align: center;
+    font-family: 'Georgia', serif;
+    color: #2f4f2f;
+    border: none;
+}
+
+.portee-wrapper .card-body .btn {
+    background-color: #a6c8a1;
+    color: white;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+}
+
+.portee-wrapper .card-body .btn:hover {
+    background-color: #8fb98a;
+}
+
+.portee-wrapper .card-body .badge {
+    display: inline-block;
+    width: auto; /* largeur ajustée au texte */
+    min-width: 100px; /* largeur minimale pour l’équilibre */
+    padding: 0.35rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-align: center;
+    margin: 0.75rem auto 0;
+    color: white;
+    background-color: #8fb98a; /* vert doux */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+
+.portee-wrapper .card-body .badge.reserved {
+    background-color: #999999; /* gris sobre pour réservé */
+}
+
+
+#panier-count-badge {
+    font-size: 0.65rem;
+    padding: 4px 6px;
+}
+
+.navbar .nav-link {
+    line-height: 0.5;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.navbar {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    position: relative;
+    z-index: 1030; /* Bootstrap recommande ≥ 1020 */
+}
+
+#panierDropdown {
+    font-size: 1.25rem;
+    border: none;
+    background: none;
+    line-height: 1;
+}
+
+#panierDropdown .badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    font-size: 0.6rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #f0f0f0;
+    color: #000;
+    border-color: #ccc;
+}
+
+.btn-outline-secondary.btn-sm {
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    text-align: center;
+    line-height: 24px;
+}
+
+.btn-outline-secondary.btn-sm:hover {
+    background-color: #e9ecef;
+    color: #000;
+}
+
+/* Supprimer le fond bleu au clic sur une ligne du panier */
+#panierDropdownMenu .dropdown-item:focus,
+#panierDropdownMenu .dropdown-item:active {
+    background-color: transparent !important;
+    color: inherit;
+    outline: none;
+    box-shadow: none;
+}
+
+/* Supprimer les flèches des inputs type number sur tous les navigateurs */
+input[type=number].no-spinner {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+
+
+/* 🎨 Formulaire d'inscription : version améliorée */
+form .form-control,
+form .form-check-input,
+form textarea.form-control {
+    border-radius: 0.75rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+form .form-control:focus {
+    border-color: #7ca58d;
+    box-shadow: 0 0 0 3px rgba(124, 165, 141, 0.2);
+    outline: none;
+}
+
+form label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.3rem;
+    display: block;
+}
+
+form .form-check {
+    margin-top: 1rem;
+}
+
+form .form-check label {
+    font-weight: normal;
+    margin-left: 0.25rem;
+}
+
+form .btn-custom {
+    background-color: #7ca58d;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    transition: background-color 0.3s ease;
+}
+
+form .btn-custom:hover {
+    background-color: #679c79;
+}
+
+/* 💬 Message sous le bouton */
+form p.text-center {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+}
+
+form p.text-center a {
+    color: #7ca58d;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+form p.text-center a:hover {
+    text-decoration: underline;
+}
+
+/* 📱 Mobile tweaks */
+@media (max-width: 576px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    form .btn-custom {
+        width: 100%;
+    }
+}
+
+/* 🌫️ Fond du formulaire sans modifier le HTML */
+form {
+    background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent */
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Champs du formulaire */
+.form-control,
+textarea,
+select {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 0.6rem;
+    background-color: #fff;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* 🧭 Labels */
+form label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+/* 🔒 Barre de progression mot de passe */
+#password-strength {
+    height: 6px;
+    border-radius: 4px;
+    margin-top: 4px;
+    background-color: #e0e0e0;
+    overflow: hidden;
+}
+#password-strength .strength-bar {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+.strength-weak { background-color: #e74c3c; }
+.strength-medium { background-color: #f1c40f; }
+.strength-strong { background-color: #2ecc71; }
+
+
+<div class="col-md-12 mb-3">
+    {{ form.password1.label_tag }}
+    {{ form.password1 }}
+    {{ form.password1.errors }}
+</div>
+
+<div class="col-md-12 mb-3">
+    {{ form.password2.label_tag }}
+    {{ form.password2 }}
+    {{ form.password2.errors }}
+</div>

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Naissances - Élevage Canin{% endblock %}
+
+{% block content %}
+<div class="container-custom">
+<h2 class="mb-4">Nos portées</h2>
+
+{% for portee in portees %}
+    <div class="portee-wrapper mb-5">
+        <h4>{{ portee.nom }}</h4>
+        <p><strong>Date de naissance :</strong> {{ portee.date_naissance }}</p>
+        <p>{{ portee.description }}</p>
+
+        <div class="row justify-content-center">
+            {% for chiot in portee.chiots.all %}
+                <div class="col-md-4 mb-4 d-flex">
+                    <div class="card h-100 w-100">
+                        {% if chiot.photo %}
+                            <img src="{{ chiot.photo.url }}" class="card-img-top" alt="{{ chiot.nom }}">
+                        {% else %}
+                            <img src="{% static 'img/placeholder_chiot.png' %}" class="card-img-top" alt="Chiot">
+                        {% endif %}
+                        <div class="card-body text-center d-flex flex-column justify-content-between">
+                            <div>
+                                <h5 class="card-title">{{ chiot.nom }}</h5>
+                                <p class="card-text">Race : {{ chiot.race }}</p>
+                                <p class="fw-bold">{{ chiot.prix }} €</p>
+                            </div>
+
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'reserver_chiot' chiot.id %}" class="btn btn-primary mt-2 mb-2">
+                                    Je suis intéressé
+                                </a>
+                            {% else %}
+                                <p class="text-muted mb-2"><em>Connectez-vous pour réserver ce chiot</em></p>
+                            {% endif %}
+
+                            <span class="badge {% if not chiot.disponible %}reserved{% endif %}">
+                                {% if chiot.disponible %}Disponible{% else %}Réservé{% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% empty %}
+    <p>Aucune portée pour le moment.</p>
+{% endfor %}
+</div>
+{% endblock %}

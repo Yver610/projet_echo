@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Réserver {{ chiot.nom }}{% endblock %}
+
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+<div class="container mt-5">
+    <h2>Réserver {{ chiot.nom }}</h2>
+    <p>Vous êtes sur le point de réserver ce chiot. Vous pouvez laisser un message à l’éleveuse :</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Envoyer la demande</button>
+    </form>
+</div>
+{% endblock %}

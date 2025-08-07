@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Passer la commande{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Récapitulatif de votre commande</h2>
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }}">
+    {{ message }}
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% if produits %}
+  <ul class="list-group mb-4">
+    {% for item in produits %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      {{ item.produit.nom }} (x{{ item.quantite }})
+      <span>{{ item.sous_total }} €</span>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <strong>Total :</strong>
+    <strong>{{ total }} €</strong>
+  </div>
+
+  <div class="text-end">
+    <form method="post">
+      {% csrf_token %}
+
+      {% for item in produits %}
+      <div class="mb-3">
+        <label for="quantite_{{ item.id }}" class="form-label d-flex justify-content-between">
+          Quantité pour {{ item.produit.nom }}
+          <small class="text-muted"><i class="bi bi-lock-fill"></i> Modifiable depuis le panier</small>
+        </label>
+        <input type="number" class="form-control no-spinner" id="quantite_{{ item.id }}" name="quantite_{{ item.id }}"
+          value="{{ item.quantite }}" min="1" max="{{ item.produit.stock }}" required readonly>
+      </div>
+      {% endfor %}
+
+      <div class="mb-4">
+        <label for="moyen_paiement" class="form-label">Sélectionnez un moyen de paiement :</label>
+        <select name="moyen_paiement" id="moyen_paiement" class="form-select" required>
+          <option value="carte">Carte bancaire</option>
+          <option value="paypal">Compte PayPal</option>
+        </select>
+      </div>
+
+      <div class="text-end">
+        <button type="submit" class="btn btn-custom">
+          Valider ma commande
+        </button>
+      </div>
+    </form>
+  </div>
+  {% else %}
+  <div class="text-center mt-5">
+    <p class="lead">Votre panier est vide.</p>
+    <a href="{% url 'boutique' %}" class="btn btn-custom mt-3">
+        🛍️ Retour à la boutique
+    </a>
+</div>
+  {% endif %}
+</div>
+{% endblock %}

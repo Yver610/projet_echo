@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Mes commandes{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Mes commandes</h2>
+
+  {% if commandes %}
+  <ul class="list-group">
+    {% for commande in commandes %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <strong>Commande n°{{ commande.id }}</strong><br>
+        Date : {{ commande.date_commande|date:"d/m/Y H:i" }}<br>
+        Statut :
+        <span class="badge 
+              {% if commande.statut == 'en_attente' %}bg-warning text-dark
+              {% elif commande.statut == 'payée' %}bg-success
+              {% elif commande.statut == 'expédiée' %}bg-info text-dark
+              {% elif commande.statut == 'annulée' %}bg-danger
+              {% endif %}">
+          {{ commande.get_statut_display }}
+        </span>
+        Paiement : {{ commande.get_moyen_paiement_display }}
+      </div>
+      <div>
+        <strong>{{ commande.total|floatformat:2 }} €</strong><br>
+        <a href="{% url 'commande_confirmation' commande.id %}" class="btn btn-outline-primary btn-sm mt-2">Voir</a>
+        {% if commande.statut != 'annulée' %}
+        <form action="{% url 'annuler_commande' commande.id %}" method="post" class="mt-2">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-sm">Annuler</button>
+        </form>
+        {% else %}
+        <p class="text-muted mt-2 mb-0">Commande annulée</p>
+        {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>Vous n'avez pas encore passé de commande.</p>
+  {% endif %}
+</div>
+{% endblock %}

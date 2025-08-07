@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% block title %}Inscription{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card p-4 shadow" style="background-color: rgba(255, 255, 255, 0.85); border-radius: 12px;">
+        <h2 class="mb-4 text-center">Créer un compte</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>{{ form.username.label }}</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                        {{ form.username }}
+                    </div>
+                    {{ form.username.errors }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>{{ form.email.label }}</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                        {{ form.email }}
+                    </div>
+                    {{ form.email.errors }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>{{ form.prenom.label }}</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        {{ form.prenom }}
+                    </div>
+                    {{ form.prenom.errors }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>{{ form.nom.label }}</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        {{ form.nom }}
+                    </div>
+                    {{ form.nom.errors }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>{{ form.telephone.label }}</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
+                        {{ form.telephone }}
+                    </div>
+                    {{ form.telephone.errors }}
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label>{{ form.adresse_postale.label }}</label>
+                    {{ form.adresse_postale }}
+                    {{ form.adresse_postale.errors }}
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label>{{ form.adresse_facturation.label }}</label>
+                    {{ form.adresse_facturation }}
+                    {{ form.adresse_facturation.errors }}
+                </div>
+                <div class="col-md-5 mb-3">
+                    {{ form.password1.label_tag }}
+                    {{ form.password1 }}
+                    <div id="password-strength" class="progress mt-1" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 0%;"></div>
+                    </div>
+                    <div id="password-conditions" class="mt-2 small">
+                            <p class="text-danger" data-condition="length">• Minimum 8 caractères</p>
+                            <p class="text-danger" data-condition="uppercase">• Une majuscule</p>
+                            <p class="text-danger" data-condition="lowercase">• Une minuscule</p>
+                            <p class="text-danger" data-condition="number">• Un chiffre</p>
+                            <p class="text-danger" data-condition="special">• Un caractère spécial</p>
+                        </div>
+                    {{ form.password1.errors }}
+                </div>
+
+                <div class="col-md-2"></div> <!-- Espace entre les deux champs -->
+
+                <div class="col-md-5 mb-3">
+                    {{ form.password2.label_tag }}
+                    {{ form.password2 }}
+                    {{ form.password2.errors }}
+                </div>
+
+            </div>
+
+            <p class="text-center mt-3">
+                Déjà inscrit ?
+                <a href="{% url 'connexion' %}?next={{ request.GET.next|urlencode }}">Se connecter</a>
+            </p>
+            <div class="text-center">
+                <button type="submit" class="btn btn-custom" id="submit-btn">Créer le compte</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- SCRIPT POUR BARRE PROGRESSION MOT DE PASSE -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const passwordField = document.getElementById('id_password1');
+    const strengthBar = document.querySelector('#password-strength .progress-bar');
+    const conditions = {
+        length: document.querySelector('[data-condition="length"]'),
+        uppercase: document.querySelector('[data-condition="uppercase"]'),
+        lowercase: document.querySelector('[data-condition="lowercase"]'),
+        number: document.querySelector('[data-condition="number"]'),
+        special: document.querySelector('[data-condition="special"]'),
+    };
+
+    if (passwordField && strengthBar) {
+        passwordField.addEventListener('input', function () {
+            const value = passwordField.value;
+            const result = analyserConditions(value);
+            const totalRemplies = Object.values(result).filter(v => v).length;
+
+            // ✅ Barre de progression
+            const strength = (totalRemplies / 5) * 100;
+            strengthBar.style.width = strength + '%';
+            strengthBar.className = 'progress-bar';
+
+            if (strength < 40) strengthBar.classList.add('bg-danger');
+            else if (strength < 80) strengthBar.classList.add('bg-warning');
+            else strengthBar.classList.add('bg-success');
+
+            // ✅ Conditions visuelles
+            for (let key in conditions) {
+                if (result[key]) {
+                    conditions[key].classList.remove('text-danger');
+                    conditions[key].classList.add('text-success');
+                } else {
+                    conditions[key].classList.remove('text-success');
+                    conditions[key].classList.add('text-danger');
+                }
+            }
+        });
+    }
+
+    function analyserConditions(mdp) {
+        return {
+            length: mdp.length >= 8,
+            uppercase: /[A-Z]/.test(mdp),
+            lowercase: /[a-z]/.test(mdp),
+            number: /\d/.test(mdp),
+            special: /[^A-Za-z0-9]/.test(mdp)
+        };
+    }
+});
+
+</script>
+
+<!-- SCRIPT POUR BOUTON CREATION COMPTE -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+    const submitBtn = document.getElementById('submit-btn');
+    const passwordField = document.getElementById('id_password1');
+    const requiredFields = form.querySelectorAll('input, textarea, select');
+    const strengthBar = document.querySelector('#password-strength .progress-bar');
+
+    function analyserConditions(mdp) {
+        return {
+            length: mdp.length >= 8,
+            uppercase: /[A-Z]/.test(mdp),
+            lowercase: /[a-z]/.test(mdp),
+            number: /\d/.test(mdp),
+            special: /[^A-Za-z0-9]/.test(mdp)
+        };
+    }
+
+    function motDePasseValide() {
+        const mdp = passwordField.value;
+        const conditions = analyserConditions(mdp);
+        return Object.values(conditions).every(Boolean);
+    }
+
+    function formulaireValide() {
+        for (let champ of requiredFields) {
+            if (champ.required && !champ.value.trim()) return false;
+            if (champ.type === 'checkbox' && champ.required && !champ.checked) return false;
+        }
+        return motDePasseValide();
+    }
+
+    function mettreAJourEtatBouton() {
+        submitBtn.disabled = !formulaireValide();
+    }
+
+    // 👂 Ajoute les écouteurs sur tous les champs du formulaire
+    requiredFields.forEach(champ => {
+        champ.addEventListener('input', mettreAJourEtatBouton);
+        champ.addEventListener('change', mettreAJourEtatBouton);
+    });
+
+    // 💡 Désactive le bouton au chargement initial
+    mettreAJourEtatBouton();
+});
+
+</script>
+{% endblock %}

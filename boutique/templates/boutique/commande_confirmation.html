@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Commande confirmée{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  {% if juste_validee %}
+  <h2 class="mb-4">Merci pour votre commande !</h2>
+  {% else %}
+  <h2 class="mb-4">Détails de votre commande</h2>
+  {% endif %}
+  {% if juste_validee %}
+  <div class="alert alert-success mt-3">
+    Votre commande a bien été enregistrée.
+  </div>
+  {% endif %}
+  <p><strong>Commande n° :</strong> {{ commande.id }}</p>
+  <p><strong>Date :</strong> {{ commande.date_commande|date:"d/m/Y H:i" }}</p>
+  <p><strong>Moyen de paiement :</strong> {{ commande.get_moyen_paiement_display }}</p>
+
+  <hr>
+
+  <h4>Articles commandés :</h4>
+  <ul class="list-group mb-3">
+    {% for ligne in lignes %}
+    <li class="list-group-item d-flex justify-content-between">
+      {{ ligne.produit.nom }} (x{{ ligne.quantite }})
+      <span>{{ ligne.get_total_ligne|floatformat:2 }} €</span>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <div class="d-flex justify-content-between">
+    <strong>Total :</strong>
+    <strong>{{ commande.total|floatformat:2 }} €</strong>
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="{% url 'home' %}" class="btn btn-primary">Retour à l'accueil</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mon panier{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Votre panier</h2>
+
+  {% if produits %}
+    <ul class="list-group mb-4">
+      {% for item in produits %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <strong>{{ item.produit.nom }}</strong><br>
+            <small>{{ item.quantite }} × {{ item.produit.prix }} €</small>
+          </div>
+          <span>{{ item.quantite|floatformat:0|add:"0"|floatformat }} × {{ item.produit.prix|floatformat:2 }} € = 
+                {{ item.quantite|floatformat:0|add:"0"|floatformat|floatformat:0|add:"0"|add:"0" }} €
+          </span>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <div class="text-end mb-4">
+      <h5>Total : {{ total|floatformat:2 }} €</h5>
+      <a href="{% url 'commande' %}" class="btn btn-primary">Passer la commande</a>
+    </div>
+
+  {% else %}
+    <p class="text-muted">Votre panier est vide.</p>
+  {% endif %}
+</div>
+{% endblock %}
