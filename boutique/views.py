@@ -31,8 +31,24 @@ def panier_count(request):
 
     return JsonResponse({'count': count})
 
+def panier_view(request):
+    """
+    Affiche le panier de l'utilisateur connecté avec la liste des produits et le total.
+    """
+    panier = Panier.objects.filter(utilisateur=request.user).first()
+    produits = panier.produits.select_related('produit') if panier else []
+    total = sum(item.produit.prix * item.quantite for item in produits)
+
+    return render(request, 'boutique/panier.html', {
+        'produits': produits,
+        'total': total
+    })
+
 def panier_detail(request):
-    return render(request, 'boutique/panier_detail.html')
+    panier = Panier.objects.filter(utilisateur=request.user).first()
+    produits = panier.produits.select_related('produit') if panier else []
+    total = sum(item.quantite * item.produit.prix for item in produits)
+    return render(request, 'boutique/panier_detail.html', {'produits': produits, 'total': total})
 
 @require_GET
 def panier_dropdown(request):
