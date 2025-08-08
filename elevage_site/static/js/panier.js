@@ -205,6 +205,8 @@ document.addEventListener('DOMContentLoaded', function () {
     boutonsAjouter.forEach(bouton => {
         bouton.addEventListener('click', function () {
             const produitId = this.dataset.id;
+            const carte = this.closest('.card');
+            const messageErreur = carte.querySelector('.panier-erreur');
 
             fetch(`/boutique/panier/ajouter/${produitId}/`, {
                 method: 'POST',
@@ -216,12 +218,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(data => {
                     if (data.success) {
                         updateCartCount();
+                        // Si réussite, on masque le message d'erreur s’il était visible
+                        if (messageErreur) {
+                            messageErreur.classList.add('d-none');
+                            messageErreur.textContent = '';
+                        }
                     } else {
-                        alert("Erreur lors de l'ajout au panier.");
+                        if (messageErreur) {
+                            messageErreur.textContent = data.message || "Une erreur s’est produite.";
+                            messageErreur.classList.remove('d-none');
+
+                            setTimeout(() => {
+                                messageErreur.classList.add('d-none');
+                            }, 4000);
+                        }
                     }
                 });
         });
     });
+
 
     // 🔍 Clic sur "Voir le produit" → remplit et affiche la modale
     document.querySelectorAll('.open-modal-btn').forEach(button => {
@@ -300,7 +315,15 @@ document.addEventListener('DOMContentLoaded', function () {
                         const modal = document.getElementById('productModal');
                         modal.style.display = 'none'; // refermer la modale
                     } else {
-                        alert("Erreur lors de l'ajout au panier.");
+                        const alertBox = document.getElementById('modal-alert');
+                            if (alertBox) {
+                                alertBox.textContent = data.message || "Une erreur s’est produite.";
+                                alertBox.classList.remove('d-none');
+
+                                setTimeout(() => {
+                                    alertBox.classList.add('d-none');
+                                }, 4000);
+                        }
                     }
                 });
         });

@@ -7,10 +7,13 @@ from django.contrib.admin import TabularInline
 
 @admin.register(Produit)
 class ProduitAdmin(admin.ModelAdmin):
-    list_display = ('nom', 'prix', 'en_stock','seuil_alerte', 'actif')
-    list_filter = ['en_stock']
-    list_filter = ['stock']
+    list_display = ('nom', 'prix', 'en_stock', 'seuil_alerte', 'actif', 'stock_critique')
+    list_filter = ['actif', 'stock']  # Tu peux ajouter d'autres filtres utiles
     search_fields = ('nom',)
+
+    @admin.display(boolean=True, description="Stock critique")
+    def stock_critique(self, obj):
+        return obj.stock <= obj.seuil_alerte
 
 @admin.register(Panier)
 class PanierAdmin(admin.ModelAdmin):

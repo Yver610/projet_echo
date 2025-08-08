@@ -14,33 +14,27 @@
         {% else %}
         <img src="{% static 'img/placeholder_produit.png' %}" class="card-img-top" alt="Image indisponible">
         {% endif %}
-
-
         <div class="card-body">
           <h5 class="card-title">{{ produit.nom }}</h5>
           <p class="card-text">{{ produit.description }}</p>
-            <p class="text-end fw-bold">{{ produit.prix }} €</p>
-
-            {% if produit.stock > 0 %}
-              <div class="text-end mb-2">
-                <button class="btn btn-sm btn-outline-primary ajouter-panier-rapide" data-id="{{ produit.id }}"
-                  title="Ajouter 1 au panier">
-                  <i class="bi bi-cart-plus"></i>
-                </button>
-              </div>
-            {% else %}
-              <div class="text-danger fw-bold text-end mb-2">
-                Produit en rupture de stock
-              </div>
-            {% endif %}
-
-          <button class="btn btn-outline-secondary mt-2 open-modal-btn" 
-                  data-id="{{ produit.id }}"
-                  data-nom="{{ produit.nom }}" 
-                  data-description="{{ produit.description }}" 
-                  data-prix="{{ produit.prix }}"
-                  data-image="{% if produit.image %}{{ produit.image.url }}{% else %}{% static 'img/placeholder_boutique.png' %}{% endif %}"
-                  data-stock="{{ produit.stock }}">
+          <p class="text-end fw-bold">{{ produit.prix }} €</p>
+          {% if produit.stock > 0 %}
+          <div class="text-end mb-2">
+            <button class="btn btn-sm btn-outline-primary ajouter-panier-rapide" data-id="{{ produit.id }}"
+              title="Ajouter 1 au panier">
+              <i class="bi bi-cart-plus"></i>
+            </button>
+            <div class="panier-erreur small text-danger mt-1 d-none"></div>
+          </div>
+          {% else %}
+          <div class="text-danger fw-bold text-end mb-2">
+            Produit en rupture de stock
+          </div>
+          {% endif %}
+          <button class="btn btn-outline-secondary mt-2 open-modal-btn" data-id="{{ produit.id }}"
+            data-nom="{{ produit.nom }}" data-description="{{ produit.description }}" data-prix="{{ produit.prix }}"
+            data-image="{% if produit.image %}{{ produit.image.url }}{% else %}{% static 'img/placeholder_boutique.png' %}{% endif %}"
+            data-stock="{{ produit.stock }}">
             Voir le produit
           </button>
         </div>
@@ -63,25 +57,22 @@
 
       <div class="modal-body d-flex flex-column flex-md-row">
         <img id="modal-product-image" src="{% static 'img/placeholder_chiot.png' %}" alt="Produit"
-             class="img-fluid mb-3 mb-md-0 me-md-4" style="max-width: 200px;">
+          class="img-fluid mb-3 mb-md-0 me-md-4" style="max-width: 200px;">
 
         <div class="modal-info flex-fill">
           <p id="modal-product-description">Description du produit ici...</p>
           <p><strong>Prix :</strong> <span id="modal-product-price">0,00 €</span></p>
 
           <label for="modal-quantity">Quantité :</label>
-          <input type="number" id="modal-quantity" name="quantity" min="1" value="1" class="form-control mb-2" style="max-width: 100px;">
+          <input type="number" id="modal-quantity" name="quantity" min="1" value="1" class="form-control mb-2"
+            style="max-width: 100px;">
 
           <p id="modal-stock-message" class="text-danger fw-semibold"></p>
-
+          <div id="modal-alert" class="alert alert-warning d-none mb-2 p-2 small text-center" role="alert"></div>
           <button id="modal-ajouter-panier" class="btn btn-primary mt-2" data-id="">Ajouter au panier</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
 {% endblock %}
