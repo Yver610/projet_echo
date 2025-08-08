@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -178,3 +179,36 @@ LOGGING = {
 
 
 LOGIN_URL = '/comptes/connexion/'
+
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Élevage Admin",
+    "site_header": "Tableau de bord Élevage",
+    "site_brand": "Élevage Canin",
+    "site_logo": "img/logo.png",
+    "welcome_sign": "Bienvenue dans l'administration de l'élevage",
+    "copyright": "© Élevage Canin 2025",
+
+  
+    "search_model": ["boutique.Produit", "naissances.Chiot"],
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "hide_models": [],
+    "order_with_respect_to": ["boutique", "naissances"],
+
+    "icons": {
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "boutique.Produit": "fas fa-dog",
+        "boutique.Commande": "fas fa-receipt",
+        "naissances.Chiot": "fas fa-bone",
+    },
+
+    "default_icon_parents": "fas fa-paw",
+    "default_icon_children": "fas fa-circle",
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "minty",
+}
